@@ -34,9 +34,9 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	}
 
 	@Override
-	public Optional<StudentRegistration> findOne(Long id) {
+	public StudentRegistration findOne(Long id) {
 		// TODO Auto-generated method stub
-		return studentRegistrationRepository.findById(id);
+		return studentRegistrationRepository.findById(id).orElse(null);
 	}
 
 	@Override

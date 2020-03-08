@@ -8,7 +8,7 @@ import edu.miu.cs.cs425.lab9.eregistrar.model.StudentRegistration;
 public interface StudentRegistrationService {
 	List<StudentRegistration> findAll();
 	StudentRegistration save(StudentRegistration studentRegistration);
-	Optional<StudentRegistration> findOne(Long id);
+	StudentRegistration findOne(Long id);
 	void delete(Long id);
 
 }

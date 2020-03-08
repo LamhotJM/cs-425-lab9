@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}">
+<body>
+	<th:block layout:fragment="header">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/studentlist.css}" />
+	</th:block>
+	
+	<th:block layout:fragment="content">
+		<h2>Student List</h2> <br/>
+		<a href="/student">Create a student</a>
+		<a href="/" id="linkBackHome" >Back to home</a><br/><br/>
+		<table class="table table-striped">
+			<thead>
+			    <th>Student ID</th>
+			    <th>Student Number</th>
+				<th>First name</th>
+				<th>Middle name</th>
+				<th>Last name</th>
+				<th>CPGA</th>
+				<th>is International</th>
+				<th>Enrollment Date</th>
+				<th>Actions</th>
+				
+			</thead>
+			<tbody>
+				<tr th:each="student : ${students}">
+					<td th:text="${student.studentId}"></td>
+					<td th:text="${student.studentNumber}"></td>
+					<td th:text="${student.firstName}"></td>
+					<td th:text="${student.middleName}"></td>
+					<td th:text="${student.lastName}"></td>
+					<td th:text="${student.cgpa}"></td>
+					<td th:text="${student.isInternational}"></td>
+					<td th:text="${student.enrollmentDate}"></td>
+					
+					<td>
+						<a th:href="@{'/eregistrar/student/edit/' + ${student.studentId}}">Edit</a>&nbsp;
+						<a th:href="@{'/eregistrar/student/delete/' + ${student.studentId}}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</th:block>
+	
+	<th:block layout:fragment="footer">
+	</th:block>
+	
+</body>
+</html>

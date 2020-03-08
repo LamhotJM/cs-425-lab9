@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="student_registrations")
@@ -35,6 +36,7 @@ public class StudentRegistration {
 	@NotBlank(message= "* Last Name is Required")
 	private String lastName;
 	private Float cgpa;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate enrollmentDate;
 	private String isInternational;
 
