@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.miu.cs.cs425.lab9.eregistrar.model.StudentRegistration;
 import edu.miu.cs.cs425.lab9.eregistrar.service.StudentRegistrationService;
 
+
 @Controller
 public class StudentRegistrationController {
 
@@ -33,24 +34,24 @@ public class StudentRegistrationController {
 		modelAndView.setViewName("student/list");
 		return modelAndView;
 	}
+	
+	
+    @GetMapping(value = {"eregistrar/student/new"})
+    public String displayNewStudentForm(Model model) {
+        model.addAttribute("student", new StudentRegistration());
+        return "student/new";
+    }
 
-	@RequestMapping(value = "eregistrar/student", method = RequestMethod.GET)
-	public String create(Model model) {
-		model.addAttribute("student", new StudentRegistration());
-		return "student/edit";
-	}
-
-	@RequestMapping(value = "eregistrar/student", method = RequestMethod.POST)
-	public String edit(@Valid @ModelAttribute("student") StudentRegistration student, BindingResult result,
-			Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("errors", result.getAllErrors());
-			return "student/edit";
-		}
-		student = studentRegService.save(student);
-		return "redirect:/students";
-	}
+    @PostMapping(value = {"eregistrar/student/new"})
+    public String addNewBook(@Valid @ModelAttribute("student") StudentRegistration student,
+                                     BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "student/new";
+        }
+        student = studentRegService.save(student);
+        return "redirect:/eregistrar/student/list";
+    }
 
 	@GetMapping(value = { "eregistrar/student/edit/{studentId}" })
 	public String editStudent(@PathVariable Long studentId, Model model) {
@@ -76,7 +77,7 @@ public class StudentRegistrationController {
 	@RequestMapping(value = "eregistrar/student/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id, Model model) {
 		studentRegService.delete(id);
-		return "redirect:/students";
+		return "redirect:/eregistrar/student/list";
 	}
 
 }
