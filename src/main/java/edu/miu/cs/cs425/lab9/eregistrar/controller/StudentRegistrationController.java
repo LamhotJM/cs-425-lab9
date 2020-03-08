@@ -43,7 +43,7 @@ public class StudentRegistrationController {
     }
 
     @PostMapping(value = {"eregistrar/student/new"})
-    public String addNewBook(@Valid @ModelAttribute("student") StudentRegistration student,
+    public String addNewStudent(@Valid @ModelAttribute("student") StudentRegistration student,
                                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
