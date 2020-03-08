@@ -40,6 +40,9 @@
 						<a th:href="@{'/eregistrar/student/delete/' + ${student.studentId}}">Delete</a>
 					</td>
 				</tr>
+				<tr th:if="${students.size() <1}">
+					<td colspan="12" style="text-align:center"; >No Book available</td>
+					</tr>
 			</tbody>
 		</table>
 	</th:block>
